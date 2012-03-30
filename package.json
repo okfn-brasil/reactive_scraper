@@ -5,5 +5,7 @@
   , "dependencies": {
       "express": "2.5.8"
     , "jade": ">= 0.0.1"
+    , "Scrap": ">= 1.0.0"
+    , "jquery": "1.6.3"
   }
 }
