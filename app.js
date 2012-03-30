@@ -16,7 +16,7 @@ app.configure(function(){
   app.use(express.bodyParser());
   app.use(express.methodOverride());
   app.use(express.cookieParser());
-  app.use(express.session({ secret: 'your secret here' }));
+  app.use(express.session({ secret: 'x1236casgusadd12' }));
   app.use(app.router);
   app.use(express.static(__dirname + '/public'));
 });
