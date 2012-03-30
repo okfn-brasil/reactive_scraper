@@ -31,6 +31,7 @@ app.configure('production', function(){
 
 // Routes
 
+app.post('/scraper', routes.scraper);
 app.get('/', routes.index);
 
 var port = process.env.PORT || 3000;
