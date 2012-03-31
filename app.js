@@ -1,9 +1,10 @@
-
 /**
  * Module dependencies.
  */
 
+
 var express = require('express')
+  , scraper_controller = require('./controllers/scraper_controller');
 
 var app = module.exports = express.createServer();
 
@@ -30,8 +31,11 @@ app.configure('production', function(){
 
 // Routes
 
-app.post('/scraper', routes.scraper);
-app.get('/', routes.index);
+app.get('/', scraper_controller.new);
+
+app.post('/scraper', scraper_controller.create);
+app.get('/scraper/:id', scraper_controller.show);
+
 
 var port = process.env.PORT || 3000;
 app.listen(port);
