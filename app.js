@@ -2,10 +2,8 @@
  * Module dependencies.
  */
 
-
 var express = require('express')
-  , scraper_controller = require('./controllers/scraper_controller');
-
+  , scraper_controller = require('./controllers/scraper_controller')
 var app = module.exports = express.createServer();
 
 // Configuration

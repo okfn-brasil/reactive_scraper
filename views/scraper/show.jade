@@ -1,4 +1,8 @@
 h1 Scraper #{scraper._id}
-textarea#code(name="code")
 
-div#result
+div.scraper(id=scraper._id)
+	textarea#code(name="code")
+		#{scraper.code}
+
+	iframe#result
+		#{target}
