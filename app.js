@@ -5,7 +5,7 @@
 var express = require('express')
   , app = module.exports = express.createServer()
   , io = require('socket.io').listen(app)
-  , scraper_controller = require('./controllers/scraper_controller');
+  , scraperController = require('./controllers/scraper_controller');
 
 // Configuration
 
@@ -33,15 +33,15 @@ io.configure(function () {
   io.set("polling duration", 10);
 });
 
-scraper_controller.enableIO(io);
+scraperController.enableIO(io);
 
 // Routes
 
 app.get('/', scraper_controller.new);
 
   // Scraper Resources
-  app.post('/scraper', scraper_controller.create);
-  app.get('/scraper/:id', scraper_controller.show);
+  app.post('/scraper', scraperController.create);
+  app.get('/scraper/:id', scraperController.show);
 
 
 var port = process.env.PORT || 3000;
