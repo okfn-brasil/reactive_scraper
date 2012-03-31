@@ -8,5 +8,6 @@
     , "scraper": ">= 0.0.9"
     , "jquery": "1.6.3"
     , "mongoose": ""
+    , "socket.io": ""
   }
 }

@@ -1,4 +1,7 @@
 var Scraper = require('../models/scraper');
+    io = require('socket.io').listen(4000);
+
+
 
 exports.new = function(req, res){
   res.render('scraper/new', { title: 'Reactive Scraper' })
