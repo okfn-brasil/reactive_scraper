@@ -3,8 +3,9 @@
  */
 
 var express = require('express')
-  , scraper_controller = require('./controllers/scraper_controller')
-var app = module.exports = express.createServer();
+  , app = module.exports = express.createServer()
+  , io = require('socket.io').listen(app)
+  , scraper_controller = require('./controllers/scraper_controller');
 
 // Configuration
 
@@ -27,12 +28,20 @@ app.configure('production', function(){
   app.use(express.errorHandler());
 });
 
+io.configure(function () {
+  io.set("transports", ["xhr-polling"]);
+  io.set("polling duration", 10);
+});
+
+scraper_controller.enableIO(io);
+
 // Routes
 
 app.get('/', scraper_controller.new);
 
-app.post('/scraper', scraper_controller.create);
-app.get('/scraper/:id', scraper_controller.show);
+  // Scraper Resources
+  app.post('/scraper', scraper_controller.create);
+  app.get('/scraper/:id', scraper_controller.show);
 
 
 var port = process.env.PORT || 3000;

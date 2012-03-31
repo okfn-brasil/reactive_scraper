@@ -1,8 +1,7 @@
 var Scraper = require('../models/scraper');
-    io = require('socket.io').listen(4000);
 
-
-var scraper_io = io
+exports.enableIO = function(io){
+  var scraper_io = io
   .on('connection', function (socket) {
     socket.on('update_code', function (data) {
       Scraper.update({_id: data.id}, {code: new String(data.code)}, {}, function (err, num){
@@ -10,8 +9,7 @@ var scraper_io = io
       });
     });
   });
-
-
+}
 
 exports.new = function(req, res){
   res.render('scraper/new', { title: 'Reactive Scraper' })
