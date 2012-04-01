@@ -8,6 +8,7 @@ var express = require('express')
   , scraperController = require('./controllers/scraper_controller')
   , mongoose = require('mongoose')
   , mongo_url = process.env.MONGOLAB_URI || "mongodb://localhost/reactive_scraper"
+  , models = require('./models');
 
 // Configuration
 
@@ -36,6 +37,9 @@ io.configure(function () {
 });
 
 mongoose.connect(mongo_url);
+
+models.configure({connection: mongoose})
+
 scraperController.enableIO(io);
 
 // Routes
