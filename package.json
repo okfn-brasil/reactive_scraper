@@ -11,7 +11,8 @@
       , "jade": ">= 0.0.1"
       , "scraper": ">= 0.0.9"
       , "jquery": "1.6.3"
-      , "mongoose": ""
-      , "socket.io": ""
+      , "mongoose": "latest"
+      , "socket.io": "latest"
+      , "open-uri": "latest"
   }
 }
