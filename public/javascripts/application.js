@@ -16,7 +16,7 @@ document.addEventListener("DOMContentLoaded", function(){
 
   var socket = io.connect(window.location.hostname);
   socket.on("updated_code", function(){
-    console.log("Opa")
+    console.log("socket callback", "updated_code")
   });
 
   $(".CodeMirror textarea").keyup(function(){
