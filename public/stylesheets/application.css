@@ -1,7 +1,132 @@
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+/* http://meyerweb.com/eric/tools/css/reset/ */
+/* v1.0 | 20080212 */
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, font, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	outline: 0;
+	font-size: 100%;
+	vertical-align: baseline;
+	background: transparent;
 }
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+
+/* remember to define focus styles! */
+:focus {
+	outline: 0;
+}
+
+/* remember to highlight inserts somehow! */
+ins {
+	text-decoration: none;
+}
+del {
+	text-decoration: line-through;
+}
+
+/* tables still need 'cellspacing="0"' in the markup */
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+
+/*
+	Colors http://www.colourlovers.com/palette/1930/cheer_up_emo_kid
+
+	556270
+	4ECDC4
+	C7F464
+	FF6B6B
+	C44D58
+*/
+
+body {
+  font: 14px "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+	body > div{
+		margin: 0 50px;
+		min-width: 600px;
+	}
+		body > div header{
+			padding: 0px 10px;
+			background-color: #556270;
+			border-radius: 0 0 5px 5px;
+		}
+		body > div header h1{
+			font: normal 50px/60px Georgia, serif;
+			color: #C7F464;
+		}
+	#content #scraper_new{
+		margin: 20% auto;
+		display: block;
+		width: 500px;
+		overflow: hidden;
+	}
+		#scraper_new label{
+			display: block;
+			color: #556270;
+			font: 25px/30px "Helvetica Neue", Helvetica, Arial, sans-serif;
+		}
+		#scraper_new #url{
+			display: block;
+			float: left;
+			font: 15px/30px "Helvetica Neue", Helvetica, Arial, sans-serif;
+			letter-spacing: 2px;
+			width: 400px;
+			padding: 5px 10px;
+			border-radius: 5px 0 0 5px;
+			border: 1px solid #4C5864;
+			background-color: #556270;
+			color: #C7F464;
+		}
+		#scraper_new #url:focus{
+			background-color: #556270;
+			border-top: 1px solid #C7F464;
+			border-bottom:1px solid  #C7F464;
+			border-left:1px solid #C7F464;
+
+		}
+		#scraper_new input[type=submit]{
+			-webkit-appearance: none;
+			-moz-appearance: none;
+			-o-appearance: none;
+			-ms-appearance: none;
+			appearance: none;
+			display: block;
+			float: left;
+			height: 42px;
+			padding: 2px 5px;
+			width: 70px;
+			border: 1px solid #4C5864;
+			margin-top: 2px;
+			font: 15px/30px "Helvetica Neue", Helvetica, Arial, sans-serif;
+			background-color: #4ECDC4;
+			border-radius: 0 5px 5px 0;
+			cursor: pointer;
+		}
 
 a {
   color: #00B7FF;
