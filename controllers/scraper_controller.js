@@ -1,6 +1,7 @@
-var Scraper = require('../models/scraper');
+var scraperController = exports;
 
-exports.enableIO = function(io){
+
+scraperController.enableIO = function(io){
   var scraper_io = io
   .on('connection', function (socket) {
     socket.on('update_code', function (data) {
@@ -11,12 +12,12 @@ exports.enableIO = function(io){
   });
 }
 
-exports.new = function(req, res){
+scraperController.new = function(req, res){
   res.render('scraper/new', { title: 'Reactive Scraper' })
 };
 
 
-exports.create = function(req, res){
+scraperController.create = function(req, res){
   scraper = new Scraper({url: req.body.url, code: ""})
   scraper.save(function(e){
     if(e == null){
@@ -27,7 +28,7 @@ exports.create = function(req, res){
   })
 };
 
-exports.show = function(req, res){
+scraperController.show = function(req, res){
   var id =  req.params.id;
 
   Scraper.findById(id, function (err, scraper){
