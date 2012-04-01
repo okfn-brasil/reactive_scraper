@@ -31,7 +31,7 @@ app.configure('production', function(){
   app.use(express.errorHandler());
 });
 
-io.configure(function () {
+io.configure('production', function () {
   io.set("transports", ["xhr-polling"]);
   io.set("polling duration", 10);
 });
