@@ -1,16 +1,11 @@
-var mongoose = require('mongoose')
-  , mongo_url = process.env.MONGOLAB_URI || "mongodb://localhost/reactive_scraper";
+exports.init = function(connection){
+	var Schema = connection.Schema;
 
-mongoose.connect(mongo_url);
+	var ScraperSchema = new Schema({
+	    url       : String
+	  , code      : String
+	});
 
-
-var Schema = mongoose.Schema
-  , ObjectId = Schema.ObjectId;
-
-
-var ScraperSchema = new Schema({
-    url       : String
-  , code      : String
-});
-
-var Scraper = module.exports = mongoose.model('Scraper', ScraperSchema);
+	var Scraper = module.exports = connection.model('Scraper', ScraperSchema);
+	return Scraper
+}

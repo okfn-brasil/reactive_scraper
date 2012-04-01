@@ -5,7 +5,9 @@
 var express = require('express')
   , app = module.exports = express.createServer()
   , io = require('socket.io').listen(app)
-  , scraperController = require('./controllers/scraper_controller');
+  , scraperController = require('./controllers/scraper_controller')
+  , mongoose = require('mongoose')
+  , mongo_url = process.env.MONGOLAB_URI || "mongodb://localhost/reactive_scraper"
 
 // Configuration
 
@@ -33,6 +35,7 @@ io.configure(function () {
   io.set("polling duration", 10);
 });
 
+mongoose.connect(mongo_url);
 scraperController.enableIO(io);
 
 // Routes
@@ -46,4 +49,3 @@ app.get('/', scraper_controller.new);
 
 var port = process.env.PORT || 3000;
 app.listen(port);
-console.log("Express server listening on port %d in %s mode", app.address().port, app.settings.env);
