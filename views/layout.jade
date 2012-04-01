@@ -10,4 +10,8 @@ html
     script(src='/javascripts/mode_javascript.js')
     script(src='/javascripts/jquery.js')
     script(src='/javascripts/application.js')
-  body!= body
+  body
+    div
+        header
+            h1 Reactive Scraper
+        #content!= body
