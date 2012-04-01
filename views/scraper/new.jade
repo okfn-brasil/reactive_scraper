@@ -1,3 +1,4 @@
-form(action="/scraper", method="POST")
-  input(name="url")
-  input(type="submit")
+form#scraper_new(action="/scraper", method="POST")
+  label(for="url") What's your target?
+  input#url(name="url")
+  input(type="submit", value="GO!")
