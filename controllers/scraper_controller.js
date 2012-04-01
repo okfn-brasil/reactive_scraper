@@ -1,5 +1,6 @@
 var scraperController = exports;
 
+var Scraper = null;
 
 scraperController.enableIO = function(io){
   var scraper_io = io
@@ -10,6 +11,10 @@ scraperController.enableIO = function(io){
       });
     });
   });
+}
+
+scraperController.model =  function(model){
+  Scraper = model;
 }
 
 scraperController.new = function(req, res){
