@@ -44,7 +44,7 @@ scraperController.enableIO(io);
 
 // Routes
 
-app.get('/', scraper_controller.new);
+app.get('/', scraperController.new);
 
   // Scraper Resources
   app.post('/scraper', scraperController.create);
