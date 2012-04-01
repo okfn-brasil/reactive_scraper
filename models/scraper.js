@@ -2,8 +2,9 @@ exports.init = function(connection){
 	var Schema = connection.Schema;
 
 	var ScraperSchema = new Schema({
-	    url       : String
-	  , code      : String
+	    url        : String
+	  , code       : String
+	  , html       : String
 	});
 
 	var Scraper = module.exports = connection.model('Scraper', ScraperSchema);
