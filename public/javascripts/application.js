@@ -1,4 +1,6 @@
 document.addEventListener("DOMContentLoaded", function(){
+  var socket = io.connect(window.location.hostname);
+
   var code_textarea = $("#code");
   var code_editor = CodeMirror.fromTextArea(code_textarea[0], {
     mode: "javascript",
@@ -9,40 +11,33 @@ document.addEventListener("DOMContentLoaded", function(){
     matchBrackets: true,
     indentWithTabs:true,
     indentUnit:4,
-    tabSize:4,
+    tabSize:2,
     fixedGutter:true,
-    onChange: function() {
-      clearTimeout(delay);
-      //delay = setTimeout(updateResultIframe, 300);
+    onChange: function(editor) {
+      var id = $("div.scraper").attr("id")
+
+      socket.emit('update_code', { code: editor.getValue(), id: id  });
     }
   });
 
-    function updateResultIframe(html) {
-      var previewFrame = document.getElementById('result');
-      var preview =  previewFrame.contentDocument ||  previewFrame.contentWindow.document;
-      preview.open();
-      preview.write(html);
-      preview.close();
-    }
+  function updateResultIframe(html, code) {
+    var previewFrame = document.getElementById('result');
+    var preview =  previewFrame.contentDocument ||  previewFrame.contentWindow.document;
+    preview.open();
+    preview.write(html+'<script src="'+window.location.origin+'/javascripts/jquery.js"></script><script id="scraper_code">document.run = function(){'+ code +'}</script>');
+    preview.close();
+    return preview;
+  }
 
-    //var delay = setTimeout(updateResultIframe, 300);
-
-
-  var socket = io.connect(window.location.hostname);
-  socket.on("updated_code", function(){
-    console.log("socket callback", "updated_code")
+  socket.on("updated_code", function(scraper){
+    updateResultIframe(scraper.html, scraper.code).run();
   });
 
   socket.on("set_target_html", function(html){
-    updateResultIframe(html);
+    updateResultIframe(html, "console.log('Loaded')").run();
   });
 
-  $(".CodeMirror textarea").keyup(function(){
-    var code = $(this).val();
-    var id = $(this).parents("div.scraper").attr("id")
-
-    socket.emit('update_code', { code: code, id: id  });
-  });
 
   socket.emit('get_target_html', $("div.scraper").attr("id"));
+
 }, false);
