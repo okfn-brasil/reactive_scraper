@@ -7,15 +7,17 @@ scraperController.enableIO = function(io){
   .on('connection', function (socket) {
     socket.on('update_code', function (data) {
       Scraper.update({_id: data.id}, {code: new String(data.code)}, {}, function (err, num){
-        socket.emit("updated_code");
+        Scraper.findById(data.id, function(err, scraper){
+          socket.emit("updated_code", scraper);
+        });
       });
     });
 
     socket.on('get_target_html', function(id){
-        var open = require("open-uri")
-        Scraper.findById(id, function(err, scraper){
-          socket.emit("set_target_html", scraper.html)
-        });
+      var open = require("open-uri")
+      Scraper.findById(id, function(err, scraper){
+        socket.emit("set_target_html", scraper.html)
+      });
     });
   });
 }
