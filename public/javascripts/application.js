@@ -21,23 +21,30 @@ document.addEventListener("DOMContentLoaded", function(){
   });
 
   function updateResultIframe(html, code) {
-    var previewFrame = document.getElementById('result');
-    var preview =  previewFrame.contentDocument ||  previewFrame.contentWindow.document;
+    var preview =  getIframeDocument();
     preview.open();
-    preview.write(html+'<script src="'+window.location.origin+'/javascripts/jquery.js"></script><script id="scraper_code">document.run = function(){'+ code +'}</script>');
+    preview.write(html+'<script src="'+ window.location.origin +'/javascripts/jquery.js"></script><script id="scraper_code">document.run = function(){'+ code +'}</script>');
     preview.close();
-    return preview;
+  }
+
+  function getIframeDocument(){
+    var frame = document.getElementById('result');
+    return frame.contentDocument || frame.contentWindow.document;
   }
 
   socket.on("updated_code", function(scraper){
-    updateResultIframe(scraper.html, scraper.code).run();
+    updateResultIframe(scraper.html, scraper.code);
   });
 
   socket.on("set_target_html", function(html){
-    updateResultIframe(html, "console.log('Loaded')").run();
+    updateResultIframe(html, "console.log('Loaded')");
   });
 
 
   socket.emit('get_target_html', $("div.scraper").attr("id"));
 
+  $("#run_code").live("click", function(){
+    var code = getIframeDocument();
+    code.run();
+  });
 }, false);

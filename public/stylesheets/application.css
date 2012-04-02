@@ -138,6 +138,37 @@ body {
 		display: block;
 		margin: 0 0 10px 0;
 	}
+	#content #run_code{
+		margin: 10px 0;
+		background: #222 url(/images/alert-overlay.png) repeat-x;
+		display: inline-block;
+		padding: 5px 20px 6px;
+		color: #fff;
+		text-decoration: none;
+		font-weight: bold;
+		line-height: 1;
+		-moz-border-radius: 5px;
+		-webkit-border-radius: 5px;
+		-moz-box-shadow: 0 1px 3px #999;
+		-webkit-box-shadow: 0 1px 3px #999;
+		text-shadow: 0 -1px 1px #222;
+		border-bottom: 1px solid #222;
+		position: relative;
+		cursor: pointer;
+		-moz-box-shadow: 0 1px 3px rgba(0,0,0,0.5);
+		-webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.5);
+		text-shadow: 0 -1px 1px rgba(0,0,0,0.25);
+		border-bottom: 1px solid rgba(0,0,0,0.25);
+		font-size: 13px;
+		background: #4ecdc4; /* Old browsers */
+		background: -moz-linear-gradient(top, #4ecdc4 0%, #4abfbd 100%); /* FF3.6+ */
+		background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#4ecdc4), color-stop(100%,#4abfbd)); /* Chrome,Safari4+ */
+		background: -webkit-linear-gradient(top, #4ecdc4 0%,#4abfbd 100%); /* Chrome10+,Safari5.1+ */
+		background: -o-linear-gradient(top, #4ecdc4 0%,#4abfbd 100%); /* Opera 11.10+ */
+		background: -ms-linear-gradient(top, #4ecdc4 0%,#4abfbd 100%); /* IE10+ */
+		background: linear-gradient(top, #4ecdc4 0%,#4abfbd 100%); /* W3C */
+
+	}
 	#content .CodeMirror{
 		width: 40%;
 		float: left;
