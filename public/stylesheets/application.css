@@ -75,9 +75,10 @@ body {
 			background-color: #556270;
 			border-radius: 0 0 5px 5px;
 		}
-		body > div header h1{
+		body > div header h1 a{
 			font: normal 50px/60px Georgia, serif;
 			color: #C7F464;
+			text-decoration: none;
 		}
 	#content #scraper_new{
 		margin: 20% auto;
@@ -127,6 +128,31 @@ body {
 			border-radius: 0 5px 5px 0;
 			cursor: pointer;
 		}
+	#content #title{
+		margin: 30px 0 0;
+		font-size: 24px;
+	}
+	#content #scraper-url{
+		font-size: 13px;
+		color: #4ECDC4;
+		display: block;
+		margin: 0 0 10px 0;
+	}
+	#content .CodeMirror{
+		width: 40%;
+		float: left;
+	}
+	#content .CodeMirror textarea, #content .CodeMirror .CodeMirror-scroll{
+		min-height: 600px;
+	}
+	#content iframe#result{
+		box-shadow: 0 0 10px #FF6B6B;
+		border-radius: 5px;
+		width: auto;
+		float: right;
+		width: 59%;
+		min-height: 600px;
+	}
 
 a {
   color: #00B7FF;

@@ -1,8 +1,10 @@
-h1 Scraper #{scraper._id}
+h2#title Scraper ##{scraper._id}
+span#scraper-url
+	a(href=scraper.url) #{scraper.url.replace(/http(|s):\/\//, "").slice(0,20)}...
 
 div.scraper(id=scraper._id)
 	textarea#code(name="code")
 		#{scraper.code}
 
-	iframe#result(style="width: 50%; height: 500px")
+	iframe#result
 		| !{scraper.html}
