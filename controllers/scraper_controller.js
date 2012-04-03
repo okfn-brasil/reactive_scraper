@@ -5,18 +5,17 @@ var Scraper = null;
 scraperController.enableIO = function(io){
   scraperController.scraper_io = io
   .on('connection', function (socket) {
-    socket.on('update_code', function (data) {
-      Scraper.update({_id: data.id}, {code: new String(data.code)}, {}, function (err, num){
-        Scraper.findById(data.id, function(err, scraper){
-          socket.emit("updated_code", scraper);
-        });
+    socket.on("save_code", function(data){
+      Scraper.update({_id: data.id}, {code: new String(data.code)}, function(){});
+    });
+    socket.on("get_to_run", function(id){
+      Scraper.findById(id, function(err, scraper){
+        socket.emit("run", scraper);
       });
     });
-
-    socket.on('get_target_html', function(id){
-      var open = require("open-uri")
+    socket.on('popule_iframe', function(id){
       Scraper.findById(id, function(err, scraper){
-        socket.emit("set_target_html", scraper.html)
+        socket.emit("data_to_iframe", scraper.html)
       });
     });
   });
@@ -34,7 +33,6 @@ scraperController.new = function(req, res){
 scraperController.create = function(req, res){
   var open = require("open-uri")
   , url_target = req.body.url;
-
 
   scraper = new Scraper({url: url_target, code: ""})
   scraper.save(function(e){
