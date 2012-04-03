@@ -1,6 +1,6 @@
 var iframeTarget = {
   get: function(){
-    var frame = document.getElementById('result');
+    var frame = document.getElementById('target');
     return frame.contentDocument || frame.contentWindow.document;
   },
   update: function(html, code, callback) {

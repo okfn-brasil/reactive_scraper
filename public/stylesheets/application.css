@@ -176,7 +176,7 @@ body {
 	#content .CodeMirror textarea, #content .CodeMirror .CodeMirror-scroll{
 		min-height: 600px;
 	}
-	#content iframe#result{
+	#content iframe#target{
 		box-shadow: 0 0 10px #FF6B6B;
 		border-radius: 5px;
 		width: auto;

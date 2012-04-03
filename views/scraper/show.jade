@@ -6,6 +6,6 @@ div.scraper(id=scraper._id)
 	textarea#code(name="code")
 		#{scraper.code}
 
-	iframe#result
+	iframe#target
 		| !{scraper.html}
 a(href="#run", id="run_code") run
