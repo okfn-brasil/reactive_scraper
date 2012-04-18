@@ -34,6 +34,7 @@ scraperController.enableIO = function(io){
       var updateResult = function(err, result){
         if(result == null) return createResult();
         Result.update({_id: result.id}, {data: DATA}, function(){});
+        socket.emit("update_result", DATA);
       };
 
       Result.findOne({scraper_id: scraper_id}, updateResult);
@@ -74,7 +75,6 @@ scraperController.create = function(req, res){
 
 scraperController.show = function(req, res){
   var id =  req.params.id;
-
   Scraper.findById(id, function (err, scraper){
     res.render('scraper/show', { title: 'Scraper ' + scraper._id, scraper: scraper })
   });

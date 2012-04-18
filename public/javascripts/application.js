@@ -47,6 +47,23 @@ document.addEventListener("DOMContentLoaded", function(){
     });
   });
 
+  socket.on("update_result", function(data){
+    var table = "<table>";
+    for (var _i in data) {
+      var row = data[_i];
+      table += "<tr>";
+      if(typeof(row) == "object"){
+        for(var _j in row){
+          column = row[_j];
+          table += "<td>" + column + "</td>";
+        }
+      }
+      table += "</tr>";
+    }
+    table += "</table>";
+    $("#result").html(table);
+  });
+
   $("#run_code").live("click", function(e){
     socket.emit('get_to_run', id);
     $(".loading").show();
