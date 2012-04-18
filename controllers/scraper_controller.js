@@ -20,6 +20,11 @@ scraperController.enableIO = function(io){
         });
       }
     });
+
+    socket.on("stop_running", function(){
+      RUNNING = false;
+    });
+
     socket.on('popule_iframe', function(id){
       Scraper.findById(id, function(err, scraper){
         socket.emit("data_to_iframe", scraper.html)

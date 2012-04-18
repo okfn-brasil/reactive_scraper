@@ -60,6 +60,7 @@ document.addEventListener("DOMContentLoaded", function(){
       $(".loading").hide();
       socket.emit("sync_result_database", window.id);
     });
+    socket.emit('stop_running');
   });
 
   socket.on("data_to_iframe", function(html){
