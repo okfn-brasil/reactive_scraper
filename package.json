@@ -9,7 +9,6 @@
   , "dependencies": {
         "express": "2.5.8"
       , "jade": ">= 0.0.1"
-      , "scraper": ">= 0.0.9"
       , "jquery": "1.6.3"
       , "mongoose": "latest"
       , "socket.io": "latest"
