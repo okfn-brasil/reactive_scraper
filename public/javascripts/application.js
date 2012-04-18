@@ -6,7 +6,7 @@ var iframeTarget = {
   update: function(html, code, callback) {
     var preview =  this.get();
     preview.open();
-    preview.write(html+'<script src="'+ window.location.origin +'/javascripts/jquery.js"></script><script id="scraper_code">document.run = function(){'+ code +'}</script>');
+    preview.write(html+'<script src="http://localhost:3000/javascripts/jquery.js"></script><script src="http://localhost:3000/socket.io/socket.io.js"></script></script><script id="scraper_code">document.run = function(){'+ code +'}</script>');
     preview.close();
     callback(preview);
   }
