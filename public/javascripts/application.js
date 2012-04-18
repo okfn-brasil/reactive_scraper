@@ -47,11 +47,10 @@ document.addEventListener("DOMContentLoaded", function(){
     });
   });
 
-
   $("#run_code").live("click", function(e){
     socket.emit('get_to_run', id);
-    e.eventPreventDefault();
     $(".loading").show();
+    e.preventDefault();
   });
 
   socket.emit('popule_iframe', id);
