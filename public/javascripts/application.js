@@ -48,6 +48,8 @@ document.addEventListener("DOMContentLoaded", function(){
 
       if(!jslintResult) return showErrors(JSLINT.errors);
 
+      socket.emit('get_to_run', id);
+      $(".loading").show();
     }
   });
 
