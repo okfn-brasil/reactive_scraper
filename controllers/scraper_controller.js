@@ -41,8 +41,9 @@ scraperController.enableIO = function(io){
   });
 }
 
-scraperController.model =  function(model){
+scraperController.model =  function(model, others){
   Scraper = model;
+  Result = others.result
 }
 
 scraperController.new = function(req, res){
