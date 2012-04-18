@@ -35,6 +35,7 @@ document.addEventListener("DOMContentLoaded", function(){
   socket.on("run", function(scraper){
     iframeTarget.update(scraper.html, scraper.code, function(code){
       code.run();
+      $(".loading").hide();
     });
 
   });
@@ -49,6 +50,7 @@ document.addEventListener("DOMContentLoaded", function(){
   $("#run_code").live("click", function(e){
     socket.emit('get_to_run', id);
     e.eventPreventDefault();
+    $(".loading").show();
   });
 
   socket.emit('popule_iframe', id);

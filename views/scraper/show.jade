@@ -1,11 +1,14 @@
 h2#title Scraper ##{scraper._id}
 span#scraper-url
-	a(href=scraper.url) #{scraper.url.replace(/http(|s):\/\//, "").slice(0,20)}...
+  a(href=scraper.url) #{scraper.url.replace(/http(|s):\/\//, "").slice(0,20)}...
 
+a(href="#run", id="run_code") run 
+span.loading(style= "display: none") Loading...
 div.scraper(id=scraper._id)
-	textarea#code(name="code")
-		#{scraper.code}
+  textarea#code(name="code")
+    #{scraper.code}
 
-	iframe#target
-		| !{scraper.html}
-a(href="#run", id="run_code") run
+  iframe#target
+    | !{scraper.html}
+
+  #result
