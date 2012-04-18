@@ -2,6 +2,7 @@ h2#title Scraper ##{scraper._id}
 span#scraper-url
   a(href=scraper.url) #{scraper.url.replace(/http(|s):\/\//, "").slice(0,20)}...
   span.loading Loading...
+ul.errors
 div.scraper(id=scraper._id)
   textarea#code(name="code")
     #{scraper.code}

@@ -19,6 +19,7 @@ var showErrors = function(errors) {
   for(var _i in errors){
     var error = errors[_i];
     if(error != null) window.code_editor.setLineClass(error.line, null, "activeline");
+    $("<li></li>").html(error.reason).appendTo("ul.errors");
   }
 }
 
@@ -41,6 +42,7 @@ document.addEventListener("DOMContentLoaded", function(){
     onChange: function(editor) {
       var theCode = editor.getValue();
       var jslintResult = JSLINT(theCode, {predef: ["$"], sloppy: true, white: true, browser: true});
+      $("ul.errors").html(" ");
       $(".activeline").removeClass("activeline");
       if(!jslintResult) return showErrors(JSLINT.errors);
 
