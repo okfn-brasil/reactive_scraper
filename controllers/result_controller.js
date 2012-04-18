@@ -12,9 +12,12 @@ resultController.show = function(req, res){
   console.log(format)
   Result.findOne({scraper_id: id}, function (err, result){
     switch(format){
+      case "json":
+        res.json(result.data)
+        break;
       case "html":
-      default:
         res.render('result/show', { title: 'Result ' + result._id, result: result });
+        break;
     }
   });
 }

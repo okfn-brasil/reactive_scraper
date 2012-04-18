@@ -55,7 +55,7 @@ app.get('/', scraperController.new);
   app.get('/scraper/:id', scraperController.show);
 
   // Result Resources
-  app.get('/result/:id', resultController.show);
+  app.get('/result/:id\.:format', resultController.show);
 
 var port = process.env.PORT || 3000;
 app.listen(port);
