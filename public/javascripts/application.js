@@ -37,6 +37,7 @@ document.addEventListener("DOMContentLoaded", function(){
     iframeTarget.update(scraper.html, scraper.code, function(code){
       code.run();
       $(".loading").hide();
+      socket.emit("sync_result_database", window.id);
     });
   });
 
