@@ -13,10 +13,11 @@ var iframeTarget = {
 }
 
 document.addEventListener("DOMContentLoaded", function(){
-  var socket = io.connect(window.location.hostname);
-  var id = $("div.scraper").attr("id")
-  var code_textarea = $("#code");
-  var code_editor = CodeMirror.fromTextArea(code_textarea[0], {
+  window.socket = io.connect(window.location.hostname);
+  window.id = $("div.scraper").attr("id");
+
+  var code_textarea = $("#code")
+    , code_editor = CodeMirror.fromTextArea(code_textarea[0], {
     mode: "javascript",
     theme:"monokai",
     value: code_textarea.val(),
@@ -37,7 +38,6 @@ document.addEventListener("DOMContentLoaded", function(){
       code.run();
       $(".loading").hide();
     });
-
   });
 
   socket.on("data_to_iframe", function(html){
