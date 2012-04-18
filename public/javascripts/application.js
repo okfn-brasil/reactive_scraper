@@ -39,11 +39,12 @@ document.addEventListener("DOMContentLoaded", function(){
     tabSize:2,
     fixedGutter:true,
     onChange: function(editor) {
-      var the_code = editor.getValue();
-      var myResult = JSLINT(the_code, {predef: ["$"], sloppy: true, white: true, browser: true});
+      var theCode = editor.getValue();
+      var jslintResult = JSLINT(theCode, {predef: ["$"], sloppy: true, white: true, browser: true});
       $(".activeline").removeClass("activeline");
-      if(!myResult) showErrors(JSLINT.errors);
-      socket.emit('save_code', { code: the_code, id: id  });
+      if(!jslintResult) return showErrors(JSLINT.errors);
+
+      socket.emit('save_code', { code: theCode, id: id  });
     }
   });
 
