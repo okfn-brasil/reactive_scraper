@@ -215,6 +215,8 @@ body {
 	}
 	#content #data{
 		clear: both;
+		max-height: 300px;
+		overflow: auto
 	}
 	#content #result #data, #content #result .close{
 		display: none;
