@@ -74,12 +74,17 @@ document.addEventListener("DOMContentLoaded", function(){
       table += "</tr>";
     }
     table += "</table>";
-    $("#result").html(table);
+    $("#result").addClass("opened").find("#data").html(table);
   });
 
   $("#run_code").live("click", function(e){
     socket.emit('get_to_run', id);
     $(".loading").show();
+    e.preventDefault();
+  });
+
+  $(".close").live("click", function(e){
+    $("#result").removeClass("opened");
     e.preventDefault();
   });
 
