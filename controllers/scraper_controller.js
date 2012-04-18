@@ -2,6 +2,7 @@ var scraperController = exports;
 
 var Scraper = null;
 
+var DATA = [];
 scraperController.enableIO = function(io){
   scraperController.scraper_io = io
   .on('connection', function (socket) {
@@ -10,6 +11,7 @@ scraperController.enableIO = function(io){
     });
     socket.on("get_to_run", function(id){
       Scraper.findById(id, function(err, scraper){
+        DATA = [];
         socket.emit("run", scraper);
       });
     });
@@ -17,6 +19,24 @@ scraperController.enableIO = function(io){
       Scraper.findById(id, function(err, scraper){
         socket.emit("data_to_iframe", scraper.html)
       });
+    });
+
+    socket.on("save_result", function(to_save){
+      DATA.push(to_save.data);
+    });
+
+    socket.on("sync_result_database", function(scraper_id){
+      var createResult = function() {
+        result = new Result({scraper_id: scraper_id, data: []});
+        result.save(updateResult);
+      };
+
+      var updateResult = function(err, result){
+        if(result == null) return createResult();
+        Result.update({_id: result.id}, {data: DATA}, function(){});
+      };
+
+      Result.findOne({scraper_id: scraper_id}, updateResult);
     });
   });
 }
