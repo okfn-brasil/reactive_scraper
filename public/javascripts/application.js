@@ -4,9 +4,11 @@ var iframeTarget = {
     return frame.contentDocument || frame.contentWindow.document;
   },
   update: function(html, code, callback) {
-    var preview =  this.get();
+    var preview =  this.get()
+      , host = window.location.origin;
+
     preview.open();
-    preview.write(html+'<script src="http://localhost:3000/javascripts/jquery.js"></script><script src="http://localhost:3000/socket.io/socket.io.js"></script><script src="http://localhost:3000/javascripts/scraper.js"></script><script id="scraper_code">document.run = function(){'+ code +'}</script>');
+    preview.write(html+'<script src="'+ host +'/javascripts/jquery.js"></script><script src="'+ host +'/socket.io/socket.io.js"></script><script src="'+ host +'/javascripts/scraper.js"></script><script id="scraper_code">document.run = function(){'+ code +'}</script>');
     preview.close();
 
     setTimeout(callback, 1000);
