@@ -134,6 +134,12 @@ body {
 		margin: 30px 0 0;
 		font-size: 24px;
 	}
+	#content .loading{
+		display: none;
+		z-index: 9999;
+		color: #FF6B6B;
+		padding: 0 10px;
+	}
 	#content #scraper-url{
 		font-size: 13px;
 		color: #4ECDC4;
@@ -206,6 +212,9 @@ body {
 		padding: 0 0 0 10px;
 		text-decoration: none;
 		color: red;
+	}
+	#content #data{
+		clear: both;
 	}
 	#content #result #data, #content #result .close{
 		display: none;
