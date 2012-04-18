@@ -44,9 +44,10 @@ document.addEventListener("DOMContentLoaded", function(){
       var jslintResult = JSLINT(theCode, {predef: ["$"], sloppy: true, white: true, browser: true});
       $("ul.errors").html(" ");
       $(".activeline").removeClass("activeline");
+      socket.emit('save_code', { code: theCode, id: id  });
+
       if(!jslintResult) return showErrors(JSLINT.errors);
 
-      socket.emit('save_code', { code: theCode, id: id  });
     }
   });
 
