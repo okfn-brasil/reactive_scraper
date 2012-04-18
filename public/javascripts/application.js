@@ -12,12 +12,20 @@ var iframeTarget = {
   }
 }
 
+var showErrors = function(errors) {
+  for(var _i in errors){
+    var error = errors[_i];
+    console.log(error.line);
+    if(error != null) window.code_editor.setLineClass(error.line, null, "activeline");
+  }
+}
+
 document.addEventListener("DOMContentLoaded", function(){
   window.socket = io.connect(window.location.hostname);
   window.id = $("div.scraper").attr("id");
 
   var code_textarea = $("#code")
-    , code_editor = CodeMirror.fromTextArea(code_textarea[0], {
+  window.code_editor = CodeMirror.fromTextArea(code_textarea[0], {
     mode: "javascript",
     theme:"monokai",
     value: code_textarea.val(),
@@ -29,7 +37,11 @@ document.addEventListener("DOMContentLoaded", function(){
     tabSize:2,
     fixedGutter:true,
     onChange: function(editor) {
-      socket.emit('save_code', { code: editor.getValue(), id: id  });
+      var the_code = editor.getValue();
+      var myResult = JSLINT(the_code, {predef: ["$"], sloppy: true, white: true, browser: true});
+      $(".activeline").removeClass("activeline");
+      if(!myResult) showErrors(JSLINT.errors);
+      socket.emit('save_code', { code: the_code, id: id  });
     }
   });
 
