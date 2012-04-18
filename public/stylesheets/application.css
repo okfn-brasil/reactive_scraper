@@ -97,6 +97,8 @@ body {
 			font: 15px/30px "Helvetica Neue", Helvetica, Arial, sans-serif;
 			letter-spacing: 2px;
 			width: 400px;
+			height: 30px;
+			margin: 2px 0;
 			padding: 5px 10px;
 			border-radius: 5px 0 0 5px;
 			border: 1px solid #4C5864;
