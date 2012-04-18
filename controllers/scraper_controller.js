@@ -3,6 +3,8 @@ var scraperController = exports;
 var Scraper = null;
 
 var DATA = [];
+var RUNNING = false;
+
 scraperController.enableIO = function(io){
   scraperController.scraper_io = io
   .on('connection', function (socket) {
@@ -10,10 +12,13 @@ scraperController.enableIO = function(io){
       Scraper.update({_id: data.id}, {code: new String(data.code)}, function(){});
     });
     socket.on("get_to_run", function(id){
-      Scraper.findById(id, function(err, scraper){
-        DATA = [];
-        socket.emit("run", scraper);
-      });
+      if(!RUNNING){
+        RUNNING = true;
+        Scraper.findById(id, function(err, scraper){
+          DATA = [];
+          socket.emit("run", scraper);
+        });
+      }
     });
     socket.on('popule_iframe', function(id){
       Scraper.findById(id, function(err, scraper){
@@ -26,6 +31,7 @@ scraperController.enableIO = function(io){
     });
 
     socket.on("sync_result_database", function(scraper_id){
+      RUNNING = false;
       var createResult = function() {
         result = new Result({scraper_id: scraper_id, data: []});
         result.save(updateResult);
