@@ -18,8 +18,9 @@ var iframeTarget = {
 var showErrors = function(errors) {
   for(var _i in errors){
     var error = errors[_i];
-    if(error != null) window.code_editor.setLineClass(error.line, null, "activeline");
-    $("<li></li>").html(error.reason).appendTo("ul.errors");
+    if(error != null)
+      window.code_editor.setLineClass(error.line, null, "activeline");
+      $("<li></li>").html(error.reason).appendTo("ul.errors");
   }
 }
 
