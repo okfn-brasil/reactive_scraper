@@ -8,14 +8,14 @@ var iframeTarget = {
     preview.open();
     preview.write(html+'<script src="http://localhost:3000/javascripts/jquery.js"></script><script src="http://localhost:3000/socket.io/socket.io.js"></script><script src="http://localhost:3000/javascripts/scraper.js"></script><script id="scraper_code">document.run = function(){'+ code +'}</script>');
     preview.close();
-    callback(preview);
+
+    setTimeout(callback, 1000);
   }
 }
 
 var showErrors = function(errors) {
   for(var _i in errors){
     var error = errors[_i];
-    console.log(error.line);
     if(error != null) window.code_editor.setLineClass(error.line, null, "activeline");
   }
 }
@@ -27,7 +27,7 @@ document.addEventListener("DOMContentLoaded", function(){
   var code_textarea = $("#code")
   window.code_editor = CodeMirror.fromTextArea(code_textarea[0], {
     mode: "javascript",
-    theme:"monokai",
+    theme: "monokai",
     value: code_textarea.val(),
     lineNumbers: true,
     gutter: true,
@@ -46,7 +46,8 @@ document.addEventListener("DOMContentLoaded", function(){
   });
 
   socket.on("run", function(scraper){
-    iframeTarget.update(scraper.html, scraper.code, function(code){
+    iframeTarget.update(scraper.html, scraper.code, function(){
+      var code = iframeTarget.get();
       code.run();
       $(".loading").hide();
       socket.emit("sync_result_database", window.id);
