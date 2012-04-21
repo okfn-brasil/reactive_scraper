@@ -40,17 +40,17 @@ document.addEventListener("DOMContentLoaded", function(){
 
   var code_textarea = $("#code")
   window.code_editor = CodeMirror.fromTextArea(code_textarea[0], {
-    mode: "javascript",
-    theme: "monokai",
-    value: code_textarea.val(),
-    lineNumbers: true,
-    gutter: true,
-    matchBrackets: true,
-    indentWithTabs:true,
-    indentUnit:4,
-    tabSize:2,
-    fixedGutter:true,
-    onChange: function(editor) {
+    mode:           "javascript",
+    theme:          "monokai",
+    value:          code_textarea.val(),
+    lineNumbers:    true,
+    gutter:         true,
+    matchBrackets:  true,
+    indentWithTabs: true,
+    indentUnit:     4,
+    tabSize:        2,
+    fixedGutter:    true,
+    onChange:       function(editor) {
       var theCode = editor.getValue();
       var jslintResult = JSLINT(theCode, {predef: ["$"], sloppy: true, white: true, browser: true});
       $("ul.errors").html(" ");
