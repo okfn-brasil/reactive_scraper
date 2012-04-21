@@ -7,4 +7,10 @@ document.addEventListener("DOMContentLoaded", function(){
     var data = (data == null) ? primary_key_or_data : data
     socket.emit("save_result", { data: data, scraper_id: scraper_id, primary_key: primary_key}); 
   }
+
+  window.console = {
+    log: function(data){
+      window.parent.console.log(data);
+    }
+  };
 });
