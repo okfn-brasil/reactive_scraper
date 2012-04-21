@@ -11,13 +11,10 @@ scraperController.enableIO = function(io){
     socket.on("save_code", function(data){
       Scraper.update({_id: data.id}, {code: new String(data.code)}, function(){});
     });
-    socket.on("get_to_run", function(id){
+
+    socket.on("reset_data", function(id){
       if(!RUNNING){
-        RUNNING = true;
-        Scraper.findById(id, function(err, scraper){
-          DATA = [];
-          socket.emit("run", scraper);
-        });
+        DATA = [];
       }
     });
 
@@ -32,10 +29,12 @@ scraperController.enableIO = function(io){
     });
 
     socket.on("save_result", function(to_save){
+      console.log(to_save)
       DATA.push(to_save.data);
     });
 
     socket.on("sync_result_database", function(scraper_id){
+      console.log(DATA);
       RUNNING = false;
       var createResult = function() {
         result = new Result({scraper_id: scraper_id, data: []});
@@ -61,7 +60,6 @@ scraperController.model =  function(model, others){
 scraperController.new = function(req, res){
   res.render('scraper/new', { title: 'Reactive Scraper' })
 };
-
 
 scraperController.create = function(req, res){
   var open = require("open-uri")
