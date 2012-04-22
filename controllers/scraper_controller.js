@@ -29,12 +29,10 @@ scraperController.enableIO = function(io){
     });
 
     socket.on("save_result", function(to_save){
-      console.log(to_save)
       DATA.push(to_save.data);
     });
 
     socket.on("sync_result_database", function(scraper_id){
-      console.log(DATA);
       RUNNING = false;
       var createResult = function() {
         result = new Result({scraper_id: scraper_id, data: []});

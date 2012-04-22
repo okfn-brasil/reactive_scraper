@@ -5,6 +5,7 @@ document.addEventListener("DOMContentLoaded", function(){
    
     var primary_key = (data == null) ? null : primary_key_or_data
     var data = (data == null) ? primary_key_or_data : data
+
     socket.emit("save_result", { data: data, scraper_id: scraper_id, primary_key: primary_key}); 
   }
 
