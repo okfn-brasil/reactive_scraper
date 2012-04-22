@@ -24,6 +24,25 @@ var iframeTarget = {
   }
 };
 
+var reactive_scraper = {
+  update_result: function(data){
+    var table = "<table>";
+    for (var _i in data) {
+      var row = data[_i];
+      table += "<tr>";
+      if(typeof(row) == "object"){
+        for(var _j in row){
+          column = row[_j];
+          table += "<td>" + column + "</td>";
+        }
+      }
+      table += "</tr>";
+    }
+    table += "</table>";
+    $("#result").addClass("opened").find("#data").html(table);
+  }
+};
+
 var showErrors = function(errors) {
   for(var _i in errors){
     var error = errors[_i];
@@ -55,6 +74,7 @@ document.addEventListener("DOMContentLoaded", function(){
       var jslintResult = JSLINT(theCode, {predef: ["$"], sloppy: true, white: true, browser: true});
       $("ul.errors").html(" ");
       $(".activeline").removeClass("activeline");
+
       socket.emit('save_code', { code: theCode, id: id  });
 
       if(!jslintResult) return showErrors(JSLINT.errors);
@@ -71,22 +91,7 @@ document.addEventListener("DOMContentLoaded", function(){
     });
   });
 
-  socket.on("update_result", function(data){
-    var table = "<table>";
-    for (var _i in data) {
-      var row = data[_i];
-      table += "<tr>";
-      if(typeof(row) == "object"){
-        for(var _j in row){
-          column = row[_j];
-          table += "<td>" + column + "</td>";
-        }
-      }
-      table += "</tr>";
-    }
-    table += "</table>";
-    $("#result").addClass("opened").find("#data").html(table);
-  });
+  socket.on("update_result", reactive_scraper.update_result);
 
   $(".close").live("click", function(e){
     $("#result").removeClass("opened");
