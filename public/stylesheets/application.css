@@ -67,24 +67,48 @@ body {
   font: 14px "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 	body > div{
-		margin: 0 50px;
-		min-width: 600px;
+		margin: 0 25px;
+		min-width: 500px;
 	}
 		body > div header{
-			padding: 0px 10px;
-			background-color: #556270;
-			border-radius: 0 0 5px 5px;
+			padding: 0;
 		}
 		body > div header h1 a{
-			font: normal 50px/60px Georgia, serif;
-			color: #C7F464;
+			font: 700 50px/60px Georgia, serif;
+			letter-spacing: -3px;
+			color: #556270;
+			text-shadow: 0 0 2px #000;
 			text-decoration: none;
 		}
-	#content #scraper_new{
-		margin: 20% auto;
-		display: block;
-		width: 500px;
+
+		aside{
+			width: 500px;
+			margin: 0 auto;
+			margin-top: 20px;
+		}
+			aside h2{
+				font-size: 25px;
+				color: #FF6B6B;
+			}
+			aside h3{
+				font-size: 22px;
+			}
+			aside p{
+				font-size: 18px;
+				line-height: 25px;
+				margin-bottom: 20px;
+			}
+
+
+
+
+
+
+
+	#scraper_new{
 		overflow: hidden;
+		width: 500px;
+		margin: 10px auto;
 	}
 		#scraper_new label{
 			display: block;
@@ -107,10 +131,8 @@ body {
 		}
 		#scraper_new #url:focus{
 			background-color: #556270;
-			border-top: 1px solid #C7F464;
-			border-bottom:1px solid  #C7F464;
-			border-left:1px solid #C7F464;
-
+			border: 1px solid #C7F464;
+			border-right: none;
 		}
 		#scraper_new input[type=submit]{
 			-webkit-appearance: none;
@@ -130,23 +152,23 @@ body {
 			border-radius: 0 5px 5px 0;
 			cursor: pointer;
 		}
-	#content #title{
+	#title{
 		margin: 30px 0 0;
 		font-size: 24px;
 	}
-	#content .loading{
+	.loading{
 		display: none;
 		z-index: 9999;
 		color: #FF6B6B;
 		padding: 0 10px;
 	}
-	#content #scraper-url{
+	#scraper-url{
 		font-size: 13px;
 		color: #4ECDC4;
 		display: block;
 		margin: 0 0 10px 0;
 	}
-	#content #run_code{
+	#run_code{
 		margin: 10px 0;
 		background: #222 url(/images/alert-overlay.png) repeat-x;
 		display: inline-block;
@@ -177,14 +199,14 @@ body {
 		background: linear-gradient(top, #4ecdc4 0%,#4abfbd 100%); /* W3C */
 
 	}
-	#content .CodeMirror{
+	.CodeMirror{
 		width: 40%;
 		float: left;
 	}
-	#content .CodeMirror textarea, #content .CodeMirror .CodeMirror-scroll{
+	.CodeMirror textarea, .CodeMirror .CodeMirror-scroll{
 		min-height: 600px;
 	}
-	#content iframe#target{
+	iframe#target{
 		box-shadow: 0 0 10px #FF6B6B;
 		border-radius: 5px;
 		width: auto;
@@ -192,7 +214,7 @@ body {
 		width: 59%;
 		min-height: 600px;
 	}
-	#content #result{
+	#result{
 		background-color: #F7F7F7;
 		border: 1px solid #333;
 		border-radius: 5px;
@@ -204,24 +226,24 @@ body {
 		font-family: "Helvetica Neue", Helvetica, Verdana, sans-serif;
 		font-size: 12px;
  	}
- 	#content #result h2{
+ 	#result h2{
  		float: left;
 	}
-	#content #result .close{
+	#result .close{
 		float: right;
 		padding: 0 0 0 10px;
 		text-decoration: none;
 		color: red;
 	}
-	#content #data{
+	#data{
 		clear: both;
 		max-height: 300px;
 		overflow: auto
 	}
-	#content #result #data, #content #result .close{
+	#result #data, #result .close{
 		display: none;
 	}
-	#content #result.opened #data, #content #result.opened .close{
+	#result.opened #data, #result.opened .close{
 		display: block;
 	}
 	#result table td{
