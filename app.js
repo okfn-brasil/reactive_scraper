@@ -42,7 +42,7 @@ models.configure({connection: mongoose})
 
 scraperController.enableIO(io);
 
-scraperController.model(models.scraper, {result: models.result});
+scraperController.model(models.scraper);
 
 // Routes
 
