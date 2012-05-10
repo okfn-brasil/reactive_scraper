@@ -11,42 +11,6 @@ scraperController.enableIO = function(io){
     socket.on("save_code", function(data){
       Scraper.update({_id: data.id}, {code: new String(data.code)}, function(){});
     });
-
-    socket.on("reset_data", function(id){
-      if(!RUNNING){
-        DATA = [];
-      }
-    });
-
-    socket.on("stop_running", function(){
-      RUNNING = false;
-    });
-
-    socket.on('popule_iframe', function(id){
-      Scraper.findById(id, function(err, scraper){
-        socket.emit("data_to_iframe", scraper.html)
-      });
-    });
-
-    socket.on("save_result", function(to_save){
-      DATA.push(to_save.data);
-    });
-
-    socket.on("sync_result_database", function(scraper_id){
-      RUNNING = false;
-      var createResult = function() {
-        result = new Result({scraper_id: scraper_id, data: []});
-        result.save(updateResult);
-      };
-
-      var updateResult = function(err, result){
-        if(result == null) return createResult();
-        Result.update({_id: result.id}, {data: DATA}, function(){});
-        socket.emit("update_result", DATA);
-      };
-
-      Result.findOne({scraper_id: scraper_id}, updateResult);
-    });
   });
 }
 

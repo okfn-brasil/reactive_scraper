@@ -15,7 +15,7 @@ var iframeTarget = {
   },
   run_code: function(the_code){
     iframeTarget.update(the_code, function(){
-      socket.emit("reset_data", window.id);
+      reactive_scraper.reset_result(window.id);
       var code = iframeTarget.get();
       code.run();
       $(".loading").hide();
@@ -40,6 +40,18 @@ var reactive_scraper = {
     }
     table += "</table>";
     $("#result").addClass("opened").find("#data").html(table);
+  },
+  save_code: function(code, id){
+    localStorage.setItem('code'+id, code);
+  },
+  reset_result: function(id){
+    localStorage.setItem('result'+id, JSON.stringify([]));
+  },
+  add_result: function(data, id){
+    var result = JSON.parse(localStorage.getItem('result'+id));
+    result.push(data);
+    localStorage.setItem('result'+id, JSON.stringify(result));
+    this.update_result(result);
   }
 };
 
@@ -76,19 +88,13 @@ document.addEventListener("DOMContentLoaded", function(){
       $(".activeline").removeClass("activeline");
 
       socket.emit('save_code', { code: theCode, id: id  });
+      reactive_scraper.save_code(theCode, id);
 
       if(!jslintResult) return showErrors(JSLINT.errors);
 
       iframeTarget.run_code(theCode);
       $(".loading").show();
     }
-  });
-
-  socket.on("data_to_iframe", function(html){
-    iframeTarget.html = html;
-    iframeTarget.update("", function(code){
-      console.log("Loaded");
-    });
   });
 
   socket.on("update_result", reactive_scraper.update_result);
@@ -98,5 +104,10 @@ document.addEventListener("DOMContentLoaded", function(){
     e.preventDefault();
   });
 
-  socket.emit('popule_iframe', id);
+  var encoded = $("iframe").html();
+  iframeTarget.html =  $('<textarea/>').html(encoded).val();
+  iframeTarget.update("", function(code){
+    console.log("Loaded");
+  });
+
 }, false);
