@@ -6,7 +6,6 @@ var express = require('express')
   , app = module.exports = express.createServer()
   , io = require('socket.io').listen(app)
   , scraperController = require('./controllers/scraper_controller')
-  , resultController = require('./controllers/result_controller')
   , mongoose = require('mongoose')
   , mongo_url = process.env.MONGOLAB_URI || "mongodb://localhost/reactive_scraper"
   , models = require('./models');
@@ -44,7 +43,6 @@ models.configure({connection: mongoose})
 scraperController.enableIO(io);
 
 scraperController.model(models.scraper, {result: models.result});
-resultController.model(models.result, {});
 
 // Routes
 
@@ -53,9 +51,6 @@ app.get('/', scraperController.new);
   // Scraper Resources
   app.post('/scraper', scraperController.create);
   app.get('/scraper/:id', scraperController.show);
-
-  // Result Resources
-  app.get('/result/:id\.:format', resultController.show);
 
 var port = process.env.PORT || 3000;
 app.listen(port);
