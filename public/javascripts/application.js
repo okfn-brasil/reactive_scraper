@@ -24,33 +24,9 @@ var iframeTarget = {
   }
 };
 
-var createTable = function(data, debug){
-   var table = "<table>";
-    for (var _i in data) {
-      var row = data[_i];
-      if(debug){
-        console.log(row)
-      }
-      table += "<tr>";
-      if(typeof(row) == "object"){
-        for(var _j in row){
-          column = row[_j];
-          if (typeof(column) == "object"){
-            table += "<td>" + createTable([column], true ) + "</td>";
-          }else{
-            table += "<td>" + column + "</td>";
-          }
-        }
-      }
-      table += "</tr>";
-    }
-    table += "</table>";
-    return table;
-}
-
 var reactiveScraper = {
   updateResult: function(data){
-    var table = createTable(data, false)
+    var table = this.createTable(data, false)
     $("#result").addClass("opened").find("#data").html(table);
   },
   saveCode: function(code, id){
@@ -64,6 +40,26 @@ var reactiveScraper = {
     result.push(data);
     localStorage.setItem('result'+id, JSON.stringify(result));
     this.updateResult(result);
+  },
+  createTable: function(data){
+   var table = "<table>";
+    for (var _i in data) {
+      var row = data[_i];
+      table += "<tr>";
+      if(typeof(row) == "object"){
+        for(var _j in row){
+          column = row[_j];
+          if (typeof(column) == "object"){
+            table += "<td>" + this.createTable([column]) + "</td>";
+          }else{
+            table += "<td>" + column + "</td>";
+          }
+        }
+      }
+      table += "</tr>";
+    }
+    table += "</table>";
+    return table;
   }
 };
 
