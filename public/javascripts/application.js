@@ -97,8 +97,6 @@ document.addEventListener("DOMContentLoaded", function(){
     }
   });
 
-  socket.on("update_result", reactive_scraper.update_result);
-
   $(".close").live("click", function(e){
     $("#result").removeClass("opened");
     e.preventDefault();
