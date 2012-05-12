@@ -6,6 +6,6 @@ document.addEventListener("DOMContentLoaded", function(){
     var primaryKey = (data == null) ? null : primaryKeyOrData
     var data = (data == null) ? primaryKeyOrData : data
 
-    reactiveScraper.addResult(data, scraperId, primaryKey);
+    reactiveScraper.result.add(data, scraperId, primaryKey);
   }
 });
