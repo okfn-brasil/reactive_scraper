@@ -24,21 +24,33 @@ var iframeTarget = {
   }
 };
 
-var reactive_scraper = {
-  update_result: function(data){
-    var table = "<table>";
+var create_table = function(data, debug){
+   var table = "<table>";
     for (var _i in data) {
       var row = data[_i];
+      if(debug){
+        console.log(row)
+      }
       table += "<tr>";
       if(typeof(row) == "object"){
         for(var _j in row){
           column = row[_j];
-          table += "<td>" + column + "</td>";
+          if (typeof(column) == "object"){
+            table += "<td>" + create_table([column], true ) + "</td>";
+          }else{
+            table += "<td>" + column + "</td>";
+          }
         }
       }
       table += "</tr>";
     }
     table += "</table>";
+    return table;
+}
+
+var reactive_scraper = {
+  update_result: function(data){
+    var table = create_table(data, false)
     $("#result").addClass("opened").find("#data").html(table);
   },
   save_code: function(code, id){
