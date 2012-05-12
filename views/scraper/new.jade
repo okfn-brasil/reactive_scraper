@@ -6,7 +6,16 @@ form#scraper_new(action="/scraper", method="POST")
 
 aside
   h2 About
-  p Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-  h3 aloe
-  p Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+  p
+    strong Reactive Scraper
+    \is a easy way to scrape data in the web and share it. Reactive Scraper use only browser technology, this means you build your bot with Javascript, using
+    a(href="http://api.jquery.com/") jQuery
+    \.
 
+  h3 How to
+  p
+    Basically you need know javascript language, we expose a method to send tour data, then you get your data and call the <code>document.save()</code>, this method expect a object with a one record by time, for example:
+  p I want get the names and votes to person in a list, the html target may be it:
+  script(src="https://gist.github.com/2662645.js?file=reactive_scraper_example.html")
+  p In Reactive Scraper, I can write this code:
+  script(src="https://gist.github.com/2662645.js?file=reactive_scraper_example.js")
