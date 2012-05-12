@@ -2,7 +2,7 @@ h2#title Scraper ##{scraper._id}
 span#scraper-url
   a(href=scraper.url) #{scraper.url.replace(/http(|s):\/\//, "").slice(0,20)}...
   span.loading Loading...
-ul.errors
+
 div.scraper(id=scraper._id)
   textarea#code(name="code")
     #{scraper.code}
@@ -10,7 +10,13 @@ div.scraper(id=scraper._id)
   iframe#target
     | !{scraper.html}
 
-#result
-  h2 Result
-  a(href='#result', class='close') x
-  #data
+
+aside
+  #result
+    h2 Result
+    a(href='#result', class='close') x
+    #data
+
+  #error
+    h2 Error
+    ul.errors
