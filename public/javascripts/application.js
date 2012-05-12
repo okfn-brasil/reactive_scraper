@@ -21,7 +21,8 @@ var reactiveScraper = {
     },
     run: function(theCode){
       reactiveScraper.errors.verify(theCode);
-      if(reactiveScraper.errors.self){ reactiveScraper.errors.show(); }
+
+      if(reactiveScraper.errors.self.length > 0){ return reactiveScraper.errors.show(); }
 
       reactiveScraper.iframe.update(theCode, function(){
         reactiveScraper.result.reset(window.id);
