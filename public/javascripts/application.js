@@ -13,9 +13,9 @@ var iframeTarget = {
 
     setTimeout(callback, 1000);
   },
-  run_code: function(the_code){
-    iframeTarget.update(the_code, function(){
-      reactive_scraper.reset_result(window.id);
+  runCode: function(theCode){
+    iframeTarget.update(theCode, function(){
+      reactiveScraper.resetResult(window.id);
       var code = iframeTarget.get();
       code.run();
       $(".loading").hide();
@@ -24,7 +24,7 @@ var iframeTarget = {
   }
 };
 
-var create_table = function(data, debug){
+var createTable = function(data, debug){
    var table = "<table>";
     for (var _i in data) {
       var row = data[_i];
@@ -36,7 +36,7 @@ var create_table = function(data, debug){
         for(var _j in row){
           column = row[_j];
           if (typeof(column) == "object"){
-            table += "<td>" + create_table([column], true ) + "</td>";
+            table += "<td>" + createTable([column], true ) + "</td>";
           }else{
             table += "<td>" + column + "</td>";
           }
@@ -48,22 +48,22 @@ var create_table = function(data, debug){
     return table;
 }
 
-var reactive_scraper = {
-  update_result: function(data){
-    var table = create_table(data, false)
+var reactiveScraper = {
+  updateResult: function(data){
+    var table = createTable(data, false)
     $("#result").addClass("opened").find("#data").html(table);
   },
-  save_code: function(code, id){
+  saveCode: function(code, id){
     localStorage.setItem('code'+id, code);
   },
-  reset_result: function(id){
+  resetResult: function(id){
     localStorage.setItem('result'+id, JSON.stringify([]));
   },
-  add_result: function(data, id){
+  addResult: function(data, id){
     var result = JSON.parse(localStorage.getItem('result'+id));
     result.push(data);
     localStorage.setItem('result'+id, JSON.stringify(result));
-    this.update_result(result);
+    this.updateResult(result);
   }
 };
 
@@ -71,7 +71,7 @@ var showErrors = function(errors) {
   for(var _i in errors){
     var error = errors[_i];
     if(error != null){
-      window.code_editor.setLineClass(error.line, null, "activeline");
+      window.codeEditor.setLineClass(error.line, null, "activeline");
       $("<li></li>").html(error.reason).appendTo("ul.errors");
     }
   }
@@ -81,11 +81,11 @@ document.addEventListener("DOMContentLoaded", function(){
   window.socket = io.connect(window.location.hostname);
   window.id = $("div.scraper").attr("id");
 
-  var code_textarea = $("#code")
-  window.code_editor = CodeMirror.fromTextArea(code_textarea[0], {
+  var codeTextarea = $("#code")
+  window.codeEditor = CodeMirror.fromTextArea(codeTextarea[0], {
     mode:           "javascript",
     theme:          "monokai",
-    value:          code_textarea.val(),
+    value:          codeTextarea.val(),
     lineNumbers:    true,
     gutter:         true,
     matchBrackets:  true,
@@ -95,16 +95,16 @@ document.addEventListener("DOMContentLoaded", function(){
     fixedGutter:    true,
     onChange:       function(editor) {
       var theCode = editor.getValue();
-      var jslintResult = JSLINT(theCode, {predef: ["$"], sloppy: true, white: true, browser: true});
+      var jslintResult = JSLINT(theCode, {predef: ["$", "console"], sloppy: true, white: true, browser: true});
       $("ul.errors").html(" ");
       $(".activeline").removeClass("activeline");
 
       socket.emit('save_code', { code: theCode, id: id  });
-      reactive_scraper.save_code(theCode, id);
+      reactiveScraper.saveCode(theCode, id);
 
       if(!jslintResult) return showErrors(JSLINT.errors);
 
-      iframeTarget.run_code(theCode);
+      iframeTarget.runCode(theCode);
       $(".loading").show();
     }
   });

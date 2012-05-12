@@ -1,17 +1,11 @@
 document.addEventListener("DOMContentLoaded", function(){
-  document.save = function(primary_key_or_data, data) {
-    var scraper_id = window.parent.window.id
-      , reactive_scraper = window.parent.window.reactive_scraper;
+  document.save = function(primaryKeyOrData, data) {
+    var scraperId = window.parent.window.id
+      , reactiveScraper = window.parent.window.reactiveScraper;
 
-    var primary_key = (data == null) ? null : primary_key_or_data
-    var data = (data == null) ? primary_key_or_data : data
+    var primaryKey = (data == null) ? null : primaryKeyOrData
+    var data = (data == null) ? primaryKeyOrData : data
 
-    reactive_scraper.add_result(data, scraper_id);
+    reactiveScraper.addResult(data, scraperId, primaryKey);
   }
-
-  window.console = {
-    log: function(data){
-      window.parent.console.log(data);
-    }
-  };
 });
