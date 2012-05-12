@@ -75,12 +75,8 @@ var reactiveScraper = {
         table += "<tr>";
         if(typeof(row) == "object"){
           for(var _j in row){
-            column = row[_j];
-            if (typeof(column) == "object"){
-              table += "<td>" + this.objToTable([column]) + "</td>";
-            }else{
-              table += "<td>" + column + "</td>";
-            }
+            var column = typeof(row[_j]) == "object" ? this.objToTable([row[_j]]) : row[_j];
+            table += "<td>" + column + "</td>";
           }
         }
         table += "</tr>";
