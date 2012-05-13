@@ -115,7 +115,6 @@ var reactiveScraper = {
       }
       return {head: head, body: body};
     },
-
     fillArray: function(array){
       var max = _.lastIndexOf(array, _.last(array))
       for(var i = 0; i < max; i++){
@@ -127,9 +126,6 @@ var reactiveScraper = {
     }
   }
 };
-
-
-
 
 
 document.addEventListener("DOMContentLoaded", function(){
