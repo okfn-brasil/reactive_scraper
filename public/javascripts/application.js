@@ -1,3 +1,9 @@
+_.mixin({
+  capitalize : function(string) {
+    return string.charAt(0).toUpperCase() + string.substring(1).toLowerCase();
+  }
+});
+
 var reactiveScraper = {
   result: {
     update: function(data){
@@ -69,23 +75,62 @@ var reactiveScraper = {
   },
   helpers: {
     objToTable: function(data){
-     var table = "<table>";
+     var table = '<table  class="table table-striped table-bordered table-condensed">',
+         a = this.getHeadAndBodyToTable(data);
+
+      table += "<thead><tr>";
+      _.each(a.head, function(h){
+        table += "<th>" + _(h).capitalize(); + "</th>";
+      });
+      table += "</tr></thead>";
+
+
+      table += "<tbody>";
+      _.each(a.body, function(row){
+        table += "<tr>";
+        _.each(row, function(column){
+          column = typeof(column) == "object" ? reactiveScraper.helpers.objToTable([column]) : column;
+
+         table += "<td>" + column + "</td>";
+        });
+        table += "<tr>";
+      });
+      table += "<tbody></table>";
+      return table;
+    },
+    getHeadAndBodyToTable: function(data){
+      var head =  [],
+          body = [];
       for (var _i in data) {
         var row = data[_i];
-        table += "<tr>";
+        body[_i] = [];
         if(typeof(row) == "object"){
           for(var _j in row){
-            var column = typeof(row[_j]) == "object" ? this.objToTable([row[_j]]) : row[_j];
-            table += "<td>" + column + "</td>";
+            head.push(_j);
+            head = _.uniq(head);
+            body[_i][_.indexOf(head, _j)] = row[_j];
           }
         }
-        table += "</tr>";
+        body[_i] = this.fillArray(body[_i]);
       }
-      table += "</table>";
-      return table;
+      return {head: head, body: body};
+    },
+
+    fillArray: function(array){
+      var max = _.lastIndexOf(array, _.last(array))
+      for(var i = 0; i < max; i++){
+        if(typeof(array[i]) == "undefined"){
+          array[i] = '';
+        }
+      }
+      return array;
     }
   }
 };
+
+
+
+
 
 document.addEventListener("DOMContentLoaded", function(){
   window.socket = io.connect(window.location.hostname);
