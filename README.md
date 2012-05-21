@@ -1,7 +1,7 @@
 # Reactive Scraper
 Reactive Scraper is a way to make scrape data from website using javascript.
 
-# How to
+## How to
 You need go to a reactivescraper.herokuapp.com or download and install reactive scraper in you computer(I will explain it after). On Reactive Scraper homepage you need put you target, a url website and press Go! 
 
 The next page there are 2 main box, the code box on left and you target in right box. Basically you write javascript code (can use jQuery) to get the data, like:
@@ -52,3 +52,12 @@ Always when the save code run, when update the config if you use only a dataset 
 	});
 
 In this example the first data will be save on *example-law* dataset and the outher on *example-authors-law*
+
+## Install 
+
+To install Reactive Scraper, you need node.js, mongoDB and npm, after follow the step:
+
+	$ git clone git://github.com/OKFN-BR/reactive_scraper.git
+	$ npm install
+	$ node app.js
+
