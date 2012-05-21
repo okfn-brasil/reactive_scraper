@@ -5,6 +5,11 @@ _.mixin({
 });
 
 var reactiveScraper = {
+  datahub: {
+    updateConfig: function(config){
+      console.log(config);
+    }
+  },
   result: {
     update: function(data){
       var table = reactiveScraper.helpers.objToTable(data)
@@ -56,7 +61,7 @@ var reactiveScraper = {
         }
       }
     },
-    config: {predef: ["$", "console"], sloppy: true, white: true, browser: true}
+    config: {predef: ["$", "console", "datahub"], sloppy: true, white: true, browser: true}
   },
   iframe: {
     html: "",
